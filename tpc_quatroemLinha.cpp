@@ -8,8 +8,6 @@ int quemJoga = 0;
 bool jogoAcabou = false, pecaColocada = false, tabuleiroCheio = false;
 
  void inicializarTabuleiro() {
-
-
     for (int x = 0; x < linhas ; x++) {
         for (int y = 0; y < colunas; y++){
             tabuleiro[x][y] = '-';
@@ -17,8 +15,6 @@ bool jogoAcabou = false, pecaColocada = false, tabuleiroCheio = false;
     }
  }
  void mostrarTabuleiro() {
-
-
     // Mostrar tabuleiro
     for (int x = 0; x < linhas ; x++) {
         cout << "\n";
@@ -35,8 +31,6 @@ bool jogoAcabou = false, pecaColocada = false, tabuleiroCheio = false;
     cout << " | ";
  }
  void verificarVencedor() {
-
-
     // Verificar se alguem ganhou em tabulero [linha 4]
     for (int x = 0; x < linhas ; x++) {
         for (int y = 0; y < colunas; y++){
@@ -151,6 +145,7 @@ void verificarTabuleiroCheio () {
     return 0;
  }
 // Tabuleiro cheio // Ganhou
+
 
 
 
