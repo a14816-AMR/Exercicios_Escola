@@ -1,46 +1,30 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
 int main () {
-    string numAluno, nome, idade;
-    string linha_aluno;
-    int numeroAlunos, i;
      // Criar e abrir o arquivo de texto
     ofstream MyFile ("dados.txt");
-    while (i < 10) {
-        cout << "ALUNO #" << i << "\n";
-        cout << "Diz o teu numero de aluno: ";
-        getline (cin, numAluno);
-        cout << "\nDiz o teu nome completo: ";
-        getline (cin, nome);
-        cout << "\nDiz a tua idade: ";
-        getline (cin, idade);
 
-        linha_aluno = numAluno + ";" + nome + ";" + idade + ";";
-        MyFile << linha_aluno;
-        MyFile << "\n";
-        i++;
-    }
-
-    MyFile.close();
-
-    string Mytext;
-    ifstream MyReadFile ("dados.txt");
-    int j = 1;
-    while (getline (MyReadFile, Mytext)) {
-        cout << "\nALUNO #" << j << "\n";
-        for (int i = 0; i < Mytext.length(); i++) {
-            if (Mytext[i] != ';')  {
-                cout << Mytext[i];
-            } else {
-                cout << "\n";
-            }
-        }
-        cout << "\n";
-        j++;
-    }
+    // Escrever no ficheiro
+    MyFile <<"Tentativa n2";
 
     // Fechar o arquivo
-    MyReadFile.close();
+    MyFile.close();
+
+    string Mytext, bio;
+
+    ifstream MyReadFile ("Lixo.txt");
+
+    while (getline (MyReadFile, Mytext)) {
+        cout << Mytext << "\n";
+    }
+
+    cout << "Diz o teu nome completo: ";
+    //cin >> bio;
+    getline (cin, bio);
+    cout << bio;
+
     return 0;
 }
+
