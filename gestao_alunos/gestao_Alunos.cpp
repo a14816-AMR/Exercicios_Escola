@@ -2,6 +2,8 @@
 #include <fstream>
 using namespace std;
 
+const NUMALUNOS = 30;
+
 string numAluno, nome, idade;
 string linha_aluno;
 string Mytext;
@@ -12,7 +14,7 @@ struct fAluno {
     int idadeFicha;
 };
 
-fAluno ficha[30];
+fAluno ficha[NUMALUNOS];
 
 void readFile (string localFicheiro) {
 
@@ -76,7 +78,7 @@ int main () {
     // Na main mostrar o ultimo registo VVV
     readFile ("dados.txt");
 
-    for (int i = 0; i < 30; i++) {
+    for (int i = 0; i < NUMALUNOS; i++) {
         if (ficha[i].numFicha == 0) {
             cout << "Ultimo registo dado:\n";
             cout << "------ALUNO #" << i << "------\n";
@@ -90,3 +92,4 @@ int main () {
 
     return 0;
 }
+
