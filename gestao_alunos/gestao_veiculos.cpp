@@ -12,7 +12,8 @@ struct Viatura {
     int nifDono;
 };
 
-string mostraCarroMaisNovo(Viatura carroX, Viatura carroY) {
+
+Viatura mostraCarroMaisNovo(Viatura carroX, Viatura carroY) {
     int carroXano = stoi(carroX.dataMatricula.substr(0, 4));
     int carroXmes = stoi(carroX.dataMatricula.substr(5, 2));
     int carroXdia = stoi(carroX.dataMatricula.substr(8, 2));
@@ -20,35 +21,36 @@ string mostraCarroMaisNovo(Viatura carroX, Viatura carroY) {
     int carroYano = stoi(carroY.dataMatricula.substr(0, 4));
     int carroYmes = stoi(carroY.dataMatricula.substr(5, 2));
     int carroYdia = stoi(carroY.dataMatricula.substr(8, 2));
-    string res = carroX.matricula;
+
+    Viatura res = carroX;
 
     if (carroXano > carroYano) {
-        res = carroX.matricula;
+        res = carroX;
     } else if (carroXano < carroYano) {
-        res = carroY.matricula;
+        res = carroY;
     } else {
         if (carroXmes > carroYmes) {
-        res = carroX.matricula;
+        res = carroX;
         } else if (carroXmes < carroYmes) {
-            res = carroY.matricula;
+            res = carroY;
         } else {
             if (carroXdia > carroYdia) {
-            res = carroX.matricula;
+            res = carroX;
             } else if (carroXdia < carroYdia) {
-                res = carroY.matricula;
+                res = carroY;
             } else {
-
             }
         }
     }
 
     return res;
-
 }
 
 int main() {
     Viatura carro1;
     Viatura carro2;
+    Viatura carro3;
+    Viatura carroAux;
 
     carro1.matricula = "EU22KJ";
     carro1.tipoVeiculo = "Carro";
@@ -62,11 +64,21 @@ int main() {
     carro2.tipoVeiculo = "Carro";
     carro2.marca = "Porshe";
     carro2.modelo = "911";
-    carro2.dataMatricula = "2018-02-24";
+    carro2.dataMatricula = "2008-02-24";
     carro2.nomeDono = "Filipe";
     carro2.nifDono = 12311515;
 
-    cout <<  mostraCarroMaisNovo(carro1, carro2);
+    carro3.matricula = "OI75Lr";
+    carro3.tipoVeiculo = "Carro";s
+    carro3.marca = "Ferrari";
+    carro3.modelo = "f40";
+    carro3.dataMatricula = "2024-03-12";
+    carro3.nomeDono = "Filipe";
+    carro3.nifDono = 12311515;
+
+    carroAux = mostraCarroMaisNovo(carro1, carro2);
+    carroAux =  mostraCarroMaisNovo(carroAux, carro3);
+    cout << carroAux.matricula;
     // cout << (stoi(carro2.dataMatricula.substr(0, 4)) + 1);
 
     return 0;
