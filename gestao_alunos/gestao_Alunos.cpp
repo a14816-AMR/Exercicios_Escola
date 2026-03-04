@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 
-const NUMALUNOS = 30;
+const int totalAlunos = 30;
 
 string numAluno, nome, idade;
 string linha_aluno;
@@ -11,85 +11,76 @@ string Mytext;
 struct fAluno {
     int numFicha;
     string nomeFicha;
-    int idadeFicha;
+    double idadeFicha;
 };
+fAluno ficha[totalAlunos];
 
-fAluno ficha[NUMALUNOS];
+void mostrarFichaAluno (fAluno ficha) {
+    cout << "***FICHA ALUNO***\n\n";
+    cout << "Num: " << ficha.numFicha << "\n";
+    cout << "Nome: " << ficha.nomeFicha << "\n";
+    cout << "Idade: " << ficha.idadeFicha << "\n\n\n";
 
-void readFile (string localFicheiro) {
+}
 
+/*double mediaIdades (fAluno ficha[totalAlunos]) {
+    double res;
+    for (int i = 0: i < totalAlunos; i++){
+        res += ficha.idadeFicha;
+    }
+    return res / totalAlunos ;
+}*/
+
+void readFile (string localFicheiro, int &numAlunos, fAluno arF[totalAlunos]) {
         ifstream MyReadFile ("dados.txt");
-        int j = 1;
+        int j = 1, total=0;
         int colunaDados;
         while (getline (MyReadFile, Mytext)) {
-            //cout << "\n------ALUNO #" << j << "------\n";
-            colunaDados = 1;
-            numAluno = nome = idade = "";
-            for (int i = 0; i < Mytext.length(); i++) {
-                if (Mytext[i] != ';')  {
-                   if (colunaDados == 1) numAluno += Mytext [i];
-                    if (colunaDados == 2) nome += Mytext [i];
-                    if (colunaDados == 3) idade += Mytext [i];
-                } else {
-                    colunaDados ++;
+            if (Mytext != "") {
+                colunaDados = 1;
+                numAluno = nome = idade = "";
+                for (int i = 0; i < Mytext.length(); i++) {
+                    if (Mytext[i] != ';')  {
+                       if (colunaDados == 1) numAluno += Mytext [i];
+                        if (colunaDados == 2) nome += Mytext [i];
+                        if (colunaDados == 3) idade += Mytext [i];
+                    } else {
+                        colunaDados ++;
+                    }
                 }
+                ficha[numAlunos].numFicha = stoi(numAluno);
+                ficha[numAlunos].nomeFicha = nome;
+                ficha[numAlunos].idadeFicha = stoi(idade);
+
+                j++;
+                numAlunos++;
             }
-
-            ficha[j-1].numFicha = stoi(numAluno);
-            ficha[j-1].nomeFicha = nome;
-            ficha[j-1].idadeFicha = stoi(idade);
-
-            /*cout << "numAluno: " << ficha[j-1].numFicha << "\n";
-            cout << "Nome: "  << ficha[j-1].nomeFicha << "\n";
-            cout << "Idade: "  << ficha[j-1].idadeFicha << "\n";*/
-
-            j++;
-
         }
-
-
+        cout << "Li " << numAlunos << " Alunos\n";
         // Fechar o arquivo
         MyReadFile.close();
 }
 
 int main () {
-     // Criar e abrir o arquivo de texto
-    /*ofstream MyFile ("dados.txt");
-        while (i < 10) {
-        cout << "\n------ALUNO #" << i << "------\n";
-        cout << "Diz o teu numero de aluno: ";
-        getline (cin, numAluno);
-        cout << "\nDiz o teu nome completo: ";
-        getline (cin, nome);
-        cout << "\nDiz a tua idade: ";
-        getline (cin, idade);
+    int numAlunos = 0, i;
+    double res;
 
-        linha_aluno = numAluno + ";" + nome + ";" + idade + ";";
-        MyFile << linha_aluno;
-        MyFile << "\n";
-        i++;
-    }
-    MyFile.close(); */
+    readFile ("dados.txt", numAlunos, ficha);
+
+    cout << "\nTenho " << numAlunos << " Alunos\n\n";
+    mostrarFichaAluno (ficha[0]);
+    mostrarFichaAluno (ficha[numAlunos-1]);
 
 
+    // Erro aqui !!!
+    for (i = 0; i < totalAlunos; i++) {
+        res += ficha[i].idadeFicha ;
 
-    // Usar STOI !!!! VVV
-    // Carregar todos os dados e migrar para ficha alunos VV
-    // Na main mostrar o ultimo registo VVV
-    readFile ("dados.txt");
-
-    for (int i = 0; i < NUMALUNOS; i++) {
-        if (ficha[i].numFicha == 0) {
-            cout << "Ultimo registo dado:\n";
-            cout << "------ALUNO #" << i << "------\n";
-            cout << "Numero: " << ficha[i-1].numFicha << "\n";
-            cout << "Nome: " << ficha[i-1].nomeFicha << "\n";
-            cout << "Idade: " << ficha[i-1].idadeFicha << "\n";
-            break;
-        }
+        if (Mytext == " ") break;
 
     }
+    cout << i;
+    cout << "\n\nMedia idades: " << res / i;
 
     return 0;
 }
-
