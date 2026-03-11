@@ -14,7 +14,6 @@ struct Modulo {
     bool concluido;
     int notaModulo;
 };
-
 struct Aluno {
     string nome;
     double idade;
@@ -41,22 +40,30 @@ double mediaModulos (Aluno turma1P2025[totalAlunos]) {
     double res = 0, modulosFeitos = 0;
     for (int i = 0; i < totalAlunos; i++) {
         if (turma1P2025[i].modulos[0].concluido == true) {
-            res += turma1P2025[alunoSelecionado].modulos[i].notaModulo;
+            res += turma1P2025[i].modulos[0].notaModulo;
+            if (turma1P2025[i].modulos[0].notaModulo == 9)
             modulosFeitos++;
         }
-    }
-
-    return res;
-}
-
-double mediaTurma (Aluno turma1P2025[totalAlunos]) {
-    double res = 0;
-    for (int i = 0; i < totalAlunos; i++){
-        //res += turma1P2025[i].modulos.notaModulo;
     }
     return res / totalAlunos;
 }
 
+double mediaTurma (Aluno turma1P2025[totalAlunos]) {
+    double res = 0, modulosFeitos = 0, mediaAluno = 0;
+    // Calcular a média de cada aluno
+    for (int i = 0; i < totalAlunos; i++) {
+        for (int j = 0; j < numModulos; j++) {
+            if (turma1P2025[i].modulos[j].concluido == true) {
+                res += turma1P2025[i].modulos[j].notaModulo;
+                modulosFeitos++;
+            }
+        }
+        mediaAluno += res / modulosFeitos;
+    }
+
+
+    return mediaAluno / totalAlunos;
+}
 
 void mostraInfo (Aluno alunoX) {
     cout << "\n\n\n-----ALUNO #-----";
@@ -68,13 +75,12 @@ void mostraInfo (Aluno alunoX) {
     else cout << "\n  concluido? Nao";
 
 }
-int numAlunoConcluiram(Aluno turma1P2025[totalAlunos]) {
-    int alunosConcluiram = 0;
-    for (int i = 1; i <= totalAlunos; i++) {
-        if (turma1P2025[i].concluido == true && turma1P2025[i].numAluno != 0) alunosConcluiram += i+1;
+void numAlunoConcluiram(Aluno turma1P2025[totalAlunos]) {
+    string alunosIncompletos = " ";
+    cout << "\n\n === Num alunos por concluir: ";
+    for (int i = 0; i < totalAlunos; i++) {
+        if (turma1P2025[i].concluido == true && turma1P2025[i].numAluno != 0) cout << "\n   => " << turma1P2025[i].numAluno << " " << turma1P2025[i].nome;
     }
-
-    return alunosConcluiram;
 }
 void alunosPorConcluir(Aluno turma1P2025[totalAlunos]) {
     string alunosIncompletos = " ";
@@ -89,7 +95,7 @@ void iniciarTurma (Aluno turma1P2025[totalAlunos]) {
     turma1P2025[0].idade = 18;
     turma1P2025[0].curso = "Programador Informático";
     turma1P2025[0].localidade = "Portugal";
-    turma1P2025[0].concluido = false;
+    turma1P2025[0].concluido = true;
     turma1P2025[0].numAluno = 14770;
 
     turma1P2025[1].nome = "Tiago Filipe Araújo de Sá"; ///
@@ -234,7 +240,7 @@ int iniciarModulo (Aluno turma1P2025[totalAlunos]) {
     turma1P2025[0].modulos[0].disciplina = "Programacao";
     turma1P2025[0].modulos[0].notaModulo = 19;
     turma1P2025[0].modulos[0].concluido = true;
-    turma1P2025[0].modulos[1].codModulo = "0805";
+    turma1P2025[0].modulos[1].codModulo = "false";
     turma1P2025[0].modulos[1].nomeModulo = "Estruturas de Dados";
     turma1P2025[0].modulos[1].disciplina = "Programacao";
     turma1P2025[0].modulos[1].notaModulo = 18;
@@ -924,6 +930,7 @@ int iniciarModulo (Aluno turma1P2025[totalAlunos]) {
                                                                                 turma1P2025[19].modulos[6].disciplina = "Programacao";
                                                                                 turma1P2025[19].modulos[6].notaModulo = 20;
                                                                                 turma1P2025[19].modulos[6].concluido = false;
+    return 0;
 
 }
 
@@ -939,13 +946,12 @@ int main () {
 
     }
 
-
-    cout << "\n\n === Num alunos completos: " << numAlunoConcluiram(turma1P2025);
+    numAlunoConcluiram(turma1P2025);
     alunosPorConcluir( turma1P2025);
 
     cout << "\n\n---MEDIAS---\n";
-    cout << "\nMedia do modulo 1: " << mediaModulos (turma1P2025);//mediaModulos (turma1P2025);
-    cout << "\nMedia modulos da turma: " << iniciarModulo(turma1P2025);
+    cout << "\nMedia do modulo 1: " << mediaModulos (turma1P2025);
+    cout << "\nMedia modulos da turma: " << mediaTurma (turma1P2025);
     cout << "\nMedia do aluno: " << mediaAluno(turma1P2025);
 
     return 0;
