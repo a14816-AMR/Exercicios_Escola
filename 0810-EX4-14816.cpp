@@ -3,7 +3,7 @@
 using namespace std;
 
 const int totalCarros = 5;
-const int totalCircuitos = 10, cirsuitoSelecionado = 9;
+const int totalCircuitos = 10, cirsuitoSelecionado = 5;
 
 struct CarroCompeticao {
     string nomePiloto;
@@ -20,7 +20,8 @@ struct Pistas {
     CarroCompeticao carroCompeticao [totalCarros];
 };
 
-void contagemPontos (Pistas circuito[totalCircuitos]) {
+/*void contagemPontos (Pistas circuito[totalCircuitos]) {
+
     int pontos = 0;
     // Somar os pontos de cada piloto
     for (int j = 0; j < totalCircuitos; j++) {
@@ -37,7 +38,6 @@ void contagemPontos (Pistas circuito[totalCircuitos]) {
         for (int j = 0; j < totalCarros - i - 1; j++) {
             if (circuito[cirsuitoSelecionado].carroCompeticao[j].pontos > circuito[cirsuitoSelecionado].carroCompeticao[j + 1].pontos) {
                 CarroCompeticao Pontos = circuito[cirsuitoSelecionado].carroCompeticao[j];
-                cout << "Pontos: " << Pontos.pontos << "\n";
                 circuito[cirsuitoSelecionado].carroCompeticao[j] = circuito[cirsuitoSelecionado].carroCompeticao[j + 1];
                 circuito[cirsuitoSelecionado].carroCompeticao[j + 1] = Pontos;
             }
@@ -53,7 +53,8 @@ void contagemPontos (Pistas circuito[totalCircuitos]) {
     }
 
 
-}
+}*/
+
 void ordenarPorTempo (Pistas circuito[totalCircuitos]){
     for (int i = 0; i < totalCarros - 1; i++) {
         for (int j = 0; j < totalCarros - i - 1; j++) {
@@ -398,8 +399,7 @@ int main () {
         exibirResultados (circuito, i);
     }
 
-    cout << "\n\n***** Pontuacao Final *****\n";
-    contagemPontos (circuito);
+    //contagemPontos (circuito);
 
     /*
     Quero saber quem ganhou a competição correndo todas as pistas, pretendo no minimo uma função para este problema.
